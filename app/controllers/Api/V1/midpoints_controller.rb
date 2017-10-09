@@ -1,6 +1,6 @@
 class Api::V1::MidpointsController < ApplicationController
 
-  # Only create midpoints
+
   def index
     midpoints = Midpoint.all
     render json: midpoints
@@ -8,13 +8,17 @@ class Api::V1::MidpointsController < ApplicationController
 
   def create
     midpoint = Midpoint.create(midpoint_params)
-    render json: midpoint
+    midpointJson = {
+      latitude: midpoint.latitude,
+      longitude: midpoint.longitude
+    }
+    render json: midpointJson
   end
 
   private
 
   def midpoint_params
-    params.require(:midpoint).permit(:latitude, :longitude)
+    params.require(:midpoint).permit(:latitude, :longitude, :search_id)
   end
 
 end
