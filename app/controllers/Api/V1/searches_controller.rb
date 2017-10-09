@@ -9,9 +9,9 @@ class Api::V1::SearchesController < ApplicationController
     search = Search.create
     locationsArray = [params[:address1], params[:address2], params[:address3]]
     newlocationsArray = locationsArray.map {|location|
-      Location.create("address": location, "search_id": search.id)
+      Location.create("address": location, "search_id": search.id) unless location.empty?
     }
-    midpoint = Midpoint.calculate(newlocationsArray, search.id)
+    midpoint = Midpoint.calculate(newlocationsArray.compact, search.id)
     search.midpoint = midpoint
     searchesJson = {
       id:search.id,
