@@ -1,0 +1,2 @@
+class Midpoint < ApplicationRecord
+end
