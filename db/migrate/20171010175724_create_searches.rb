@@ -4,6 +4,7 @@ class CreateSearches < ActiveRecord::Migration[5.1]
       t.string :address1
       t.string :address2
       t.string :address3
+      t.integer :user_id
 
       t.timestamps
     end
