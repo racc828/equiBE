@@ -28,6 +28,12 @@ class Api::V1::SearchesController < ApplicationController
     render json: searchesJson
   end
 
+
+  def get_user_searches
+    userSearches = current_user.searches
+    render json: userSearches
+  end
+
   private
 
      def search_params
