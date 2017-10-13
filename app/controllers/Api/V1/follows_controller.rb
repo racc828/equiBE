@@ -6,4 +6,16 @@ class Api::V1::FollowsController < ApplicationController
     render json: user
   end
 
+  def unfollow_friend
+    friend = Follow.all.find { |follower| follower.following_id === params[:user_id] && current_user.id === follower.user_id }
+    friend.destroy
+    followers =  current_user.following
+    render json: followers
+  end
+
+  def my_friends
+    myfriends = current_user.following
+    render json: myfriends
+  end
+
 end

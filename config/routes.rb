@@ -3,6 +3,8 @@ Rails.application.routes.draw do
 		namespace :v1 do
 			resources :users, :midpoints, :searches, :locations, :venues, :follows
       post '/follows/follow_user', to: 'follows#follow_user'
+      post '/follows/my_friends', to: 'follows#my_friends'
+      post '/follows/unfollow_friend', to: 'follows#unfollow_friend'
       post '/searches/get_user_searches', to: 'searches#get_user_searches'
       post '/users/find_friends', to: 'users#find_friends'
       post '/sessions', to: 'sessions#create'
