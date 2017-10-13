@@ -28,6 +28,16 @@ class Api::V1::UsersController < ApplicationController
     render json: user
   end
 
+  def find_friends
+    newUsers = User.all.map {|user|
+      if user.firstname === params[:firstname]
+        user
+      end
+    }
+    matches = newUsers.compact
+    render json: matches
+  end
+
   def destroy
     user = User.find_by(id: params[:id])
     user.destroy
