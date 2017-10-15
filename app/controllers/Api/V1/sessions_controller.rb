@@ -8,7 +8,8 @@ class Api::V1::SessionsController < ApplicationController
       username: current_user.username,
       firstname: current_user.firstname,
       lastname: current_user.lastname,
-      email: current_user.email
+      email: current_user.email,
+      fullname: current_user.fullname
     }
   end
 

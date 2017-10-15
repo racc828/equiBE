@@ -30,8 +30,6 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def find_friends
-
-
     usersFullNames = User.all.map {|user|
       user.fullname
     }
