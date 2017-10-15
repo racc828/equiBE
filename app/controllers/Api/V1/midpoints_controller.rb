@@ -7,12 +7,7 @@ class Api::V1::MidpointsController < ApplicationController
   end
 
   def create
-    # midpoint = Midpoint.create(midpoint_params)
-    # midpointJson = {
-    #   latitude: midpoint.latitude,
-    #   longitude: midpoint.longitude
-    # }
-    # render json: midpointJson
+
   end
 
   private
