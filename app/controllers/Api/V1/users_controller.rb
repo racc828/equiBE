@@ -13,6 +13,7 @@ class Api::V1::UsersController < ApplicationController
       firstname: user.firstname,
       lastname: user.lastname,
       email: user.email,
+      fullname: user.fullname,
       jwt: JWT.encode({id: user.id}, "equidestined")
     }
   end
@@ -29,12 +30,17 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def find_friends
-    newUsers = User.all.map {|user|
-      if user.firstname === params[:firstname]
-        user
+
+
+    usersFullNames = User.all.map {|user|
+      user.fullname
+    }
+    foundUsers = usersFullNames.map {|fullname|
+      if fullname.include?(params[:fullname])
+        User.all.find_by(fullname: fullname)
       end
     }
-    matches = newUsers.compact
+    matches = foundUsers.compact
     render json: matches
   end
 
@@ -48,7 +54,7 @@ class Api::V1::UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:firstname, :lastname, :email, :username, :password)
+    params.require(:user).permit(:firstname, :lastname, :email, :username, :password, :fullname)
   end
 
 end

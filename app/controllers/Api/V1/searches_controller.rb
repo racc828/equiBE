@@ -15,6 +15,7 @@ class Api::V1::SearchesController < ApplicationController
       Location.create("address": location, "search_id": search.id) unless location.empty?
     }
     midpoint = Midpoint.calculate(newlocationsArray.compact, search.id)
+    convertMidpointToAddress = Conversion.create("latitude": midpoint.latitude, "longitude": midpoint.longitude)
     search.midpoint = midpoint
     if current_user.present?
       search.user_id = current_user.id
@@ -23,7 +24,8 @@ class Api::V1::SearchesController < ApplicationController
     searchesJson = {
       id:search.id,
       locations: search.locations,
-      midpoint: search.midpoint
+      midpoint: search.midpoint,
+      midpointAddress: convertMidpointToAddress.address
     }
     render json: searchesJson
   end
