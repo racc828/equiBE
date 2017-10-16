@@ -18,4 +18,15 @@ class Api::V1::FollowsController < ApplicationController
     render json: myfriends
   end
 
+  def get_friend_info
+    friend = User.find(params[:friend_id])
+    friendJson = {
+      fullname: friend.fullname,
+      firstname: friend.firstname,
+      lastname: friend.lastname,
+      venues: friend.venues
+    }
+    render json: friendJson
+  end
+
 end
