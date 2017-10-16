@@ -31,9 +31,16 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def update
-    user = User.find_by(id: params[:id])
-    user.update(user_params)
-    render json: user
+    username = User.find_by(username: params[:username])
+    if username.present? && current_user.username != username.username
+      render json: {
+        error: "User Exists Already"
+      }, status: 404
+    else
+      edituser = User.find_by(id: params[:id])
+      edituser.update(edit_user_params)
+      render json: edituser
+    end
   end
 
   def find_friends
@@ -60,6 +67,10 @@ class Api::V1::UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:firstname, :lastname, :email, :username, :password, :fullname)
+  end
+
+  def edit_user_params
+    params.require(:user).permit(:firstname, :lastname, :email, :username, :fullname)
   end
 
 end
