@@ -12,6 +12,13 @@ class Api::V1::VenuesController < ApplicationController
     render json: venue
   end
 
+  def destroy
+    venue = Venue.find_by(id: params[:id])
+    venue.destroy
+    venues = current_user.venues
+    render json: venues
+  end
+
   private
 
   def venue_params
