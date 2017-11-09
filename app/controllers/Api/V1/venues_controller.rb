@@ -2,7 +2,7 @@ class Api::V1::VenuesController < ApplicationController
 
 
   def index
-    venues = current_user.venues
+    venues = current_user.venues.reverse
     render json: venues
   end
 
@@ -22,7 +22,7 @@ class Api::V1::VenuesController < ApplicationController
   private
 
   def venue_params
-    params.require(:venue).permit(:user_id, :name, :vicinity)
+    params.require(:venue).permit(:user_id, :name, :url, :street, :city, :rating)
   end
 
 end
