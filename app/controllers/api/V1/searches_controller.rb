@@ -5,7 +5,7 @@ class Api::V1::SearchesController < ApplicationController
     render json: searches
   end
 
-  def create
+  def create  
     search = Search.create(search_params)
     locationsArray = [params[:address1], params[:address2], params[:address3]]
     if !params[:address3].empty?
