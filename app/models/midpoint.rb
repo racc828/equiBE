@@ -3,8 +3,8 @@ class Midpoint < ApplicationRecord
 
 
   def self.calculate(locations, searchId)
-    # takes in an array of Location objects and returns a Midpoint object with the latitude and longitude of the geographic center/midpoint
-
+    byebug
+    #NOTE takes in an array of coordinates
     coords = Geocoder::Calculations.geographic_center(locations)
     self.create(latitude: coords[0], longitude: coords[1], search_id: searchId)
   end
