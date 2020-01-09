@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   namespace :api do
-		namespace :V1 do
+		namespace :v1 do
 			resources :users, :midpoints, :searches, :locations, :venues, :follows
       post '/conversions/create_conversion', to: 'conversions#create_conversion'
       post '/follows/follow_user', to: 'follows#follow_user'
